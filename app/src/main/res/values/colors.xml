@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+
+    <color name="grey">#bfbfbf</color>
+    <color name="white">#fff</color>
+
+    <color name="dotDefault">#3D3D3D</color>
+    <color name="dotSelected">#D81B60</color>
+
+    <color name="album_title">#4c4c4c</color>
+
+    <color name="colorFormBackground">#e4e4e4</color>
+    <color name="colorTextHint">#46ffffff</color>
+    <color name="textColorlight">#5d5d5d</color>
+    <color name="textGreenColor">#56b359</color>
+    <color name="textRedColor">#c83250</color>
+    <color name="colorDark">#a21919</color>
+</resources>
