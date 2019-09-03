@@ -16,6 +16,11 @@ import com.microlearning.model.user.User;
 import com.microlearning.storage.SharedPrefManager;
 import com.sinavtime.microlearning.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +28,7 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextEmail, editTextPassword;
-    private EditText editTextFirstName, editTextLastName;
+    private EditText editTextFirstName, editTextLastName,editTextCode;
 
 
     @Override
@@ -34,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editTextLastName = findViewById(R.id.editTextLastName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextCode = findViewById(R.id.editTextCode);
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
@@ -54,8 +60,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void userSignUp() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-        String name = editTextFirstName.getText().toString().trim();
-        String school = editTextLastName.getText().toString().trim();
+        String firstName = editTextFirstName.getText().toString().trim();
+        String lastName = editTextLastName.getText().toString().trim();
+        String code = editTextCode.getText().toString().trim();
 
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
@@ -81,18 +88,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        if (name.isEmpty()) {
+        if (firstName.isEmpty()) {
             editTextFirstName.setError("Name required");
             editTextFirstName.requestFocus();
             return;
         }
 
-        if (school.isEmpty()) {
-            editTextLastName.setError("School required");
+        if (lastName.isEmpty()) {
+            editTextLastName.setError("LastName required");
             editTextLastName.requestFocus();
             return;
         }
+
+        if (code.isEmpty()) {
+            editTextCode.setError("Code required");
+            editTextCode.requestFocus();
+            return;
+        }
         SaveUserRequestDTO saveUserRequestDTO = new SaveUserRequestDTO();
+        saveUserRequestDTO.setCode(editTextCode.getText().toString());
         saveUserRequestDTO.setEmail(editTextEmail.getText().toString());
         saveUserRequestDTO.setPassword(editTextPassword.getText().toString());
         saveUserRequestDTO.setFirstName(editTextFirstName.getText().toString());
@@ -115,12 +129,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 } else if (response.code() == 422) {
                     Toast.makeText(RegisterActivity.this, "Kullanıcı Zaten Var", Toast.LENGTH_LONG).show();
+                }else if (response.code() == 500) {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        Toast.makeText(RegisterActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
                 Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
             }

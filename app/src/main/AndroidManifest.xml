@@ -9,15 +9,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.microlearning.activities.ContentActivity"
-            android:parentActivityName="com.microlearning.activities.MainActivity"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name="com.microlearning.activities.LoginActivity"
-            android:parentActivityName="com.microlearning.activities.LoginActivity"></activity>
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.microlearning.activities.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name="com.microlearning.activities.MainActivity"
-            android:label="@string/app_name">
+            android:name="com.microlearning.activities.RegisterActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
