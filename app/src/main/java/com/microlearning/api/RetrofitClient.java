@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://ec2-52-15-236-131.us-east-2.compute.amazonaws.com/";
+    private static final String BASE_URL = "http://ec2-52-15-236-131.us-east-2.compute.amazonaws.com:8080/microlearning-1.0.5/";
 
     public static Retrofit getRetrofitInstance(Context context) {
         /*

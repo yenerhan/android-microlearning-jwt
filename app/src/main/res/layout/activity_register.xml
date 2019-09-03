@@ -25,7 +25,16 @@
         android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:padding="10dp">
-
+        <EditText
+            android:id="@+id/editTextCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:hint="Code"
+            android:inputType="text"
+            android:textColor="@color/colorFormBackground"
+            android:textColorHint="@color/colorTextHint"
+            android:backgroundTint="@color/colorDark"/>
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"

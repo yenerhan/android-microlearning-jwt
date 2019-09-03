@@ -2,6 +2,7 @@ package com.microlearning.model.user;
 
 public class SaveUserRequestDTO {
 
+    private String code;
     private String firstName;
     private String lastName;
     private String email;
@@ -10,11 +11,12 @@ public class SaveUserRequestDTO {
     public SaveUserRequestDTO() {
     }
 
-    public SaveUserRequestDTO(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getFirstName() {
