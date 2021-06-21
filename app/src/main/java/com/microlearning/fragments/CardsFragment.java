@@ -2,16 +2,17 @@ package com.microlearning.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.microlearning.adapter.CardAdapter;
-import com.microlearning.interfaces.CardViewListener;
 import com.microlearning.model.CardDTO;
 import com.sinavtime.microlearning.R;
 
@@ -23,6 +24,12 @@ public class CardsFragment extends Fragment {
     private RecyclerView recyclerView;
     private CardAdapter adapter;
     private List<CardDTO> cardDTOList;
+    private CardViewListener listener;
+
+    FloatingActionButton fab, fab1;
+    Animation fab_open, fab_close, rotate_clock, rotate_anticlock;
+    boolean isOpen = false;
+    boolean admin = true;
 
 
     @Override
@@ -38,13 +45,15 @@ public class CardsFragment extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
         cardDTOList = new ArrayList<>();
         loadCardDTO();
-        adapter = new CardAdapter(getActivity(), cardDTOList, (CardViewListener) getActivity());
-
+        adapter = new CardAdapter(getActivity(), cardDTOList, listener);
+        setupFloatingButton(v);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
         return v;
     }
+
+
 
     private void loadCardDTO() {
         if (cardDTOList != null) {
@@ -93,10 +102,55 @@ public class CardsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (context instanceof CardViewListener) {
+            listener = (CardViewListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement CardViewListener");
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        listener=null;
+    }
+
+    public interface CardViewListener {
+        void showCardDetails(Long cardId);
+        void createNewGallery();
+    }
+
+    private void setupFloatingButton(View v) {
+        if (admin) {
+            fab = v.findViewById(R.id.fab);
+            fab1 = v.findViewById(R.id.fab1);
+            fab_open = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+            fab_close = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+            rotate_clock = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_clock);
+            rotate_anticlock = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_anticlock);
+            fab.startAnimation(fab_open);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isOpen) {
+                        fab.startAnimation(rotate_anticlock);
+                        fab1.startAnimation(fab_close);
+                        fab1.setClickable(false);
+                        isOpen = false;
+                    } else {
+                        fab.startAnimation(rotate_clock);
+                        fab1.startAnimation(fab_open);
+                        fab1.setClickable(true);
+                        isOpen = true;
+                    }
+                }
+            });
+            fab1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.createNewGallery();
+                }
+            });
+        }
     }
 }

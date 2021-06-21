@@ -3,6 +3,7 @@
     package="com.sinavtime.microlearning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,10 +17,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name="com.microlearning.activities.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.microlearning.activities.MainActivity"
+        <activity android:name="com.microlearning.activities.RegisterActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.microlearning.activities.RegisterActivity"
+            android:name="com.microlearning.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

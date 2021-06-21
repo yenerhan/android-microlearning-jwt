@@ -9,26 +9,28 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.microlearning.model.ContentDTO;
+import com.microlearning.model.GalleryItem;
 import com.sinavtime.microlearning.R;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
-public class ContentAdapter extends PagerAdapter {
+public class GalleryAdapter extends PagerAdapter {
 
-    private List<ContentDTO> contentDTOList;
     private Context context;
     private LayoutInflater inflater;
+    List<GalleryItem> galleryItems;
 
-    public ContentAdapter(List<ContentDTO> contentDTOList, Context context) {
-        this.contentDTOList = contentDTOList;
+    public GalleryAdapter(List<GalleryItem> galleryItems, Context context) {
+        this.galleryItems = galleryItems;
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return contentDTOList.size();
+        return galleryItems.size();
     }
 
     @Override
@@ -41,8 +43,7 @@ public class ContentAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View view = inflater.inflate(R.layout.content, container, false);
         ImageView imageView = view.findViewById(R.id.image);
-        ContentDTO contentDTO = contentDTOList.get(position);
-        imageView.setImageResource(contentDTO.getContentImage());
+        Picasso.with(context).load(new File(galleryItems.get(position).imageUri)).fit().into(imageView);
         container.addView(view);
         return view;
     }

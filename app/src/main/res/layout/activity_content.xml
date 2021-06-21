@@ -13,11 +13,11 @@
 
     </android.support.v4.view.ViewPager>
 
-    <LinearLayout
-        android:id="@+id/dotsLayout"
+    <!--Gallery strip Recyclerview-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewGallery"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:gravity="center"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

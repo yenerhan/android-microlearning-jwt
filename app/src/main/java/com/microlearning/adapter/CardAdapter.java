@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.microlearning.interfaces.CardViewListener;
+import com.microlearning.fragments.CardsFragment;
 import com.microlearning.model.CardDTO;
 import com.microlearning.viewHolder.CardViewHolder;
 import com.sinavtime.microlearning.R;
@@ -19,9 +19,9 @@ public class CardAdapter extends RecyclerView.Adapter {
 
     LayoutInflater inflater;
     private List<CardDTO> cardDTOList = new ArrayList<>();
-    CardViewListener cardViewListener;
+    CardsFragment.CardViewListener cardViewListener;
 
-    public CardAdapter(Context context, List<CardDTO> cardDTOList,CardViewListener cardViewListener) {
+    public CardAdapter(Context context, List<CardDTO> cardDTOList, CardsFragment.CardViewListener cardViewListener) {
         inflater = LayoutInflater.from(context);
         this.cardViewListener=cardViewListener;
         if (cardDTOList != null) {

@@ -1,13 +1,12 @@
 package com.microlearning.viewHolder;
 
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.microlearning.interfaces.CardViewListener;
+import com.microlearning.fragments.CardsFragment;
 import com.microlearning.model.CardDTO;
 import com.sinavtime.microlearning.R;
 
@@ -28,10 +27,10 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
         this.card_mini_photo = (ImageView) itemView.findViewById(R.id.card_mini_photo);
         this.card_title = (TextView) itemView.findViewById(R.id.card_title);
         this.card_status = (TextView) itemView.findViewById(R.id.card_status);
-        this.progressBar=itemView.findViewById(R.id.progressBar);
+        this.progressBar = itemView.findViewById(R.id.progressBar);
     }
 
-    public void setData(final CardDTO cardDTO, final CardViewListener listener) {
+    public void setData(final CardDTO cardDTO, final CardsFragment.CardViewListener listener) {
         this.card_mini_photo.setImageResource(cardDTO.getImageId());
         this.card_title.setText(cardDTO.getTitle());
         this.card_status.setText(cardDTO.getStatus());
@@ -41,7 +40,7 @@ public class CardViewHolder extends RecyclerView.ViewHolder {
         this.card_mini_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.cardActivityStart(cardDTO.getCardId());
+                listener.showCardDetails(cardDTO.getCardId());
             }
         });
     }

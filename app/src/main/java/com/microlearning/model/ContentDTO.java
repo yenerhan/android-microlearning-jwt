@@ -4,6 +4,7 @@ public class ContentDTO {
 
     private int contentImage;
     private String text;
+    public boolean isSelected = false;
 
     public int getContentImage() {
         return contentImage;
@@ -19,5 +20,13 @@ public class ContentDTO {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
